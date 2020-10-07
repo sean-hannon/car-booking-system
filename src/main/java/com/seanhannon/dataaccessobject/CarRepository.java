@@ -7,5 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 
 public interface CarRepository extends CrudRepository<CarDO, Long>, JpaSpecificationExecutor<CarDO> {
-    Optional<CarDO> findByLicensePlate(String licensePlate);
+  Optional<CarDO> findByLicensePlate(String licensePlate);
 }

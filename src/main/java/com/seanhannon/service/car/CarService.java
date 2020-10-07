@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface CarService {
 
-    CarDO create(CarDO carDO) throws EntityNotFoundException, ConstraintsViolationException;
+  CarDO create(CarDO carDO) throws EntityNotFoundException, ConstraintsViolationException;
 
-    CarDO find(long carId) throws EntityNotFoundException;
+  CarDO find(long carId) throws EntityNotFoundException;
 
-    List<CarDO> findAll();
+  List<CarDO> findAll();
 
-    void delete(long carId);
+  void delete(long carId);
 
-    CarDO update(long carId, CarDO carDO) throws EntityNotFoundException;
+  CarDO update(long carId, CarDO carDO) throws EntityNotFoundException;
 }

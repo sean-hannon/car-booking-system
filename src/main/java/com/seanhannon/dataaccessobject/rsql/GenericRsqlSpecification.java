@@ -94,21 +94,21 @@ public class GenericRsqlSpecification<T> implements Specification<T> {
       From lastFrom = root;
 
       for (int i = 1; i <= pathSteps.length - 1; i++) {
-        if(path instanceof PluralAttributePath) {
+        if (path instanceof PluralAttributePath) {
           PluralAttribute attr = ((PluralAttributePath) path).getAttribute();
           Join join = getJoin(attr, lastFrom);
           path = join.get(pathSteps[i]);
           lastFrom = join;
-        } else if(path instanceof SingularAttributePath) {
+        } else if (path instanceof SingularAttributePath) {
           SingularAttribute attr = ((SingularAttributePath) path).getAttribute();
-          if(attr.getPersistentAttributeType() != Attribute.PersistentAttributeType.BASIC) {
+          if (attr.getPersistentAttributeType() != Attribute.PersistentAttributeType.BASIC) {
             Join join = lastFrom.join(attr, JoinType.LEFT);
             path = join.get(pathSteps[i]);
             lastFrom = join;
           } else {
             path = path.get(pathSteps[i]);
           }
-        }  else {
+        } else {
           path = path.get(pathSteps[i]);
         }
       }
@@ -119,7 +119,7 @@ public class GenericRsqlSpecification<T> implements Specification<T> {
   }
 
   private Join getJoin(PluralAttribute attr, From from) {
-    switch (attr.getCollectionType()){
+    switch (attr.getCollectionType()) {
       case COLLECTION:
         return from.join((CollectionAttribute) attr);
       case SET:

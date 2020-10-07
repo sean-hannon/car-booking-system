@@ -25,35 +25,35 @@ import java.util.List;
 @RequestMapping("v1/cars")
 public class CarController {
 
-    @Autowired
-    CarService carService;
+  @Autowired
+  CarService carService;
 
-    @GetMapping
-    public List<CarDTO> getCars(){
-        return CarMapper.makeCarDTOList(carService.findAll());
-    }
+  @GetMapping
+  public List<CarDTO> getCars() {
+    return CarMapper.makeCarDTOList(carService.findAll());
+  }
 
-    @GetMapping("/{carId}")
-    public CarDTO getCar(@PathVariable long carId) throws EntityNotFoundException{
-        return CarMapper.makeCarDTO(carService.find(carId));
-    }
+  @GetMapping("/{carId}")
+  public CarDTO getCar(@PathVariable long carId) throws EntityNotFoundException {
+    return CarMapper.makeCarDTO(carService.find(carId));
+  }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public CarDTO createCar(@Valid @RequestBody CarDTO carDTO) throws EntityNotFoundException,
-            ConstraintsViolationException {
-        CarDO carDO = CarMapper.makeCarDO(carDTO);
-        return CarMapper.makeCarDTO(carService.create(carDO));
-    }
+  @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
+  public CarDTO createCar(@Valid @RequestBody CarDTO carDTO) throws EntityNotFoundException,
+    ConstraintsViolationException {
+    CarDO carDO = CarMapper.makeCarDO(carDTO);
+    return CarMapper.makeCarDTO(carService.create(carDO));
+  }
 
-    @DeleteMapping("/{carId}")
-    public void deleteCar(@PathVariable long carId){
-        carService.delete(carId);
-    }
+  @DeleteMapping("/{carId}")
+  public void deleteCar(@PathVariable long carId) {
+    carService.delete(carId);
+  }
 
-    @PutMapping("/{carId}")
-    public CarDTO update(@PathVariable long carId, @Valid @RequestBody CarDTO carDTO) throws EntityNotFoundException{
-        CarDO carDO = CarMapper.makeCarDO(carDTO);
-        return CarMapper.makeCarDTO(carService.update(carId, carDO));
-    }
+  @PutMapping("/{carId}")
+  public CarDTO update(@PathVariable long carId, @Valid @RequestBody CarDTO carDTO) throws EntityNotFoundException {
+    CarDO carDO = CarMapper.makeCarDO(carDTO);
+    return CarMapper.makeCarDTO(carService.update(carId, carDO));
+  }
 }
