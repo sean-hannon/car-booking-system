@@ -3,6 +3,7 @@ package com.seanhannon.controller;
 import com.seanhannon.controller.mapper.DriverMapper;
 import com.seanhannon.datatransferobject.DriverDTO;
 import com.seanhannon.domainobject.DriverDO;
+import com.seanhannon.domainvalue.OnlineStatus;
 import com.seanhannon.exception.CarAlreadyInUseException;
 import com.seanhannon.exception.ConstraintsViolationException;
 import com.seanhannon.exception.DriverAlreadySelectedACarException;
@@ -53,9 +54,9 @@ public class DriverController {
     driverService.delete(driverId);
   }
 
-  @PutMapping("/{driverId}")
+  @PutMapping(value = "/{driverId}", params = {"longitude", "latitude"})
   public void updateLocation(
-    @PathVariable long driverId, @RequestParam double longitude, @RequestParam double latitude)
+    @PathVariable long driverId, @RequestParam(value = "longitude") double longitude, @RequestParam(value = "latitude") double latitude)
     throws EntityNotFoundException {
     driverService.updateLocation(driverId, longitude, latitude);
   }
@@ -75,5 +76,10 @@ public class DriverController {
   @GetMapping
   public List<DriverDTO> findAllByQuery(@RequestParam(value = "search") String search) throws IllegalSearchException {
     return DriverMapper.makeDriverDTOList(driverService.search(search));
+  }
+
+  @PutMapping(value = "/{driverId}", params = {"status"})
+  public DriverDTO updateDriverStatus(@PathVariable long driverId, @Valid @RequestParam(value = "status") OnlineStatus status) throws EntityNotFoundException {
+    return DriverMapper.makeDriverDTO(driverService.updateStatus(driverId, status));
   }
 }

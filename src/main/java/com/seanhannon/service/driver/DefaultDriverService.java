@@ -75,6 +75,13 @@ public class DefaultDriverService implements DriverService {
     driverDO.setCoordinate(new GeoCoordinate(latitude, longitude));
   }
 
+  @Override
+  @Transactional
+  public DriverDO updateStatus(long driverId, OnlineStatus status) throws EntityNotFoundException {
+    DriverDO driverDO = findDriverChecked(driverId);
+    driverDO.setOnlineStatus(status);
+    return driverDO;
+  }
 
   @Override
   public List<DriverDO> find(OnlineStatus onlineStatus) {
@@ -130,6 +137,7 @@ public class DefaultDriverService implements DriverService {
       throw new IllegalSearchException("Search request is invalid, search request: " + search);
     }
   }
+
 
 
   private DriverDO findDriverChecked(Long driverId) throws EntityNotFoundException {

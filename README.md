@@ -7,6 +7,7 @@ This system will allow drivers to book a car.
 A user will need to be authenticated to make a request against the driver and car endpoints.
 This will be done with the following endpoint.
 
+## Authentication Endpoint
 **_/authenticate_**<br/>
 **POST ONLY**
 
@@ -22,6 +23,8 @@ Example response:
  }`
  
  All subsequent calls will need to include this token under Authorization header
+ 
+## Driver Endpoints
  
  **_v1/drivers/{driverId}_**<br/>
  **GET**
@@ -84,10 +87,52 @@ Example of the response:<br/>
 ]
 ```
  
- 
- 
- 
- 
+**_v1/drivers_**<br/>
+**POST**
 
+To create a new driver use the following endpoint.
 
-    
+The request payload should be like this:<br/>
+
+```
+{
+	"username": "newDriver",
+	"password": "newDriverPW"
+}
+```
+
+Response will be:<br/>
+
+```
+{
+    "id": 9,
+    "username": "newDriver",
+    "password": "newDriverPW",
+    "onlineStatus": "OFFLINE"
+}
+```
+
+**_v1/drivers/{driverId}_**<br/>
+**DELETE**
+
+This will delete a driver for the given ID.
+
+**_v1/drivers/{driverId}?longitude={double}&latitude={double}_**<br/>
+**PUT**
+
+This endpoint will update the driver's location for the given ID<br/>
+
+**_v1/drivers/{driverId}?status={ONLINE/OFFLINE}_**<br/>
+**PUT**
+
+This endpoint will update the driver's online status for the given ID<br/>
+
+**_v1/drivers/{driverId}/cars/{carId}_**<br/>
+**PUT**
+
+This will update the driver with their selected car if it is available, also the driver must be online.
+
+**_v1/drivers/{driverId}/cars/_**<br/>
+**PUT**
+
+This will deselect the car for the given driverId.

@@ -31,4 +31,6 @@ public interface DriverService {
   DriverDO deselectCar(long driverId) throws EntityNotFoundException, DriverNoCarSelectedException;
 
   Collection<DriverDO> search(String search) throws IllegalSearchException;
+
+  DriverDO updateStatus(long driverId, OnlineStatus status) throws EntityNotFoundException;
 }
