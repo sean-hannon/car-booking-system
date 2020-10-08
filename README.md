@@ -4,10 +4,10 @@ This system will allow drivers to book a car.
 
 ## Endpoints
 
+### Authentication Endpoint
 A user will need to be authenticated to make a request against the driver and car endpoints.
 This will be done with the following endpoint.
 
-## Authentication Endpoint
 **_/authenticate_**<br/>
 **POST ONLY**
 
@@ -24,8 +24,7 @@ Example response:
  
  All subsequent calls will need to include this token under Authorization header
  
-## Driver Endpoints
- 
+### Driver Endpoints
  **_v1/drivers/{driverId}_**<br/>
  **GET**
  
@@ -136,3 +135,7 @@ This will update the driver with their selected car if it is available, also the
 **PUT**
 
 This will deselect the car for the given driverId.
+
+## Future Work
+* More testing
+* Build frontend
