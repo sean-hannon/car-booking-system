@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.seanhannon.domainvalue.GeoCoordinate;
+import com.seanhannon.domainvalue.OnlineStatus;
 
 import javax.validation.constraints.NotNull;
 
@@ -19,6 +20,8 @@ public class DriverDTO {
   private String password;
 
   private GeoCoordinate coordinate;
+
+  private OnlineStatus onlineStatus;
 
   private Long carId;
 
@@ -39,6 +42,15 @@ public class DriverDTO {
     this.password = password;
     this.coordinate = coordinate;
     this.carId = carId;
+  }
+
+  private DriverDTO(Long id, String username, String password, GeoCoordinate coordinate, Long carId, OnlineStatus onlineStatus) {
+    this.id = id;
+    this.username = username;
+    this.password = password;
+    this.coordinate = coordinate;
+    this.carId = carId;
+    this.onlineStatus = onlineStatus;
   }
 
   public static DriverDTOBuilder newBuilder() {
@@ -66,12 +78,17 @@ public class DriverDTO {
     return carId;
   }
 
+  public OnlineStatus getOnlineStatus() {
+    return onlineStatus;
+  }
+
   public static class DriverDTOBuilder {
     private Long id;
     private String username;
     private String password;
     private GeoCoordinate coordinate;
     private Long carId;
+    private OnlineStatus onlineStatus;
 
     public DriverDTOBuilder setId(Long id) {
       this.id = id;
@@ -98,8 +115,13 @@ public class DriverDTO {
       return this;
     }
 
+    public DriverDTOBuilder setOnlineStatus(OnlineStatus onlineStatus){
+      this.onlineStatus = onlineStatus;
+      return this;
+    }
+
     public DriverDTO createDriverDTO() {
-      return new DriverDTO(id, username, password, coordinate, carId);
+      return new DriverDTO(id, username, password, coordinate, carId, onlineStatus);
     }
   }
 }
