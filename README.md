@@ -2,6 +2,8 @@
 
 This system will allow drivers to book a car.
 
+The project was created to explore how to create search endpoints without having an explosion of methods in the repository classes 
+
 ## Endpoints
 
 ### Authentication Endpoint
@@ -128,5 +130,6 @@ This will update the driver with their selected car if it is available, also the
 This will deselect the car for the given driverId.
 
 ## Future Work
+* Extend search feature to cars
 * More testing
 * Build frontend
