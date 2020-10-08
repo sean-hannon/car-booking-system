@@ -8,8 +8,7 @@ This system will allow drivers to book a car.
 A user will need to be authenticated to make a request against the driver and car endpoints.
 This will be done with the following endpoint.
 
-**_/authenticate_**<br/>
-**POST ONLY**
+**POST ONLY** **_/authenticate_**<br/> 
 
 Payload: 
 
@@ -25,8 +24,7 @@ Example response:
  All subsequent calls will need to include this token under Authorization header
  
 ### Driver Endpoints
- **_v1/drivers/{driverId}_**<br/>
- **GET**
+**GET** **_v1/drivers/{driverId}_**<br/>
  
  This will return a driver object similar to the response below:
  
@@ -42,8 +40,7 @@ Example response:
   "onlineStatus": "OFFLINE"
  }
 ```
-**_v1/driver?search={searchquery}_**<br/>
-**GET**
+**GET** **_v1/driver?search={searchquery}_**<br/>
 
 This endpoint will return a list of drivers who meet the search query. Some examples of these requests are shown below:<br/>
 
@@ -86,8 +83,7 @@ Example of the response:<br/>
 ]
 ```
  
-**_v1/drivers_**<br/>
-**POST**
+**POST** **_v1/drivers_**<br/>
 
 To create a new driver use the following endpoint.
 
@@ -111,28 +107,23 @@ Response will be:<br/>
 }
 ```
 
-**_v1/drivers/{driverId}_**<br/>
-**DELETE**
+**DELETE** **_v1/drivers/{driverId}_**<br/>
 
 This will delete a driver for the given ID.
 
-**_v1/drivers/{driverId}?longitude={double}&latitude={double}_**<br/>
-**PUT**
+**PUT** **_v1/drivers/{driverId}?longitude={double}&latitude={double}_**<br/>
 
 This endpoint will update the driver's location for the given ID<br/>
 
-**_v1/drivers/{driverId}?status={ONLINE/OFFLINE}_**<br/>
-**PUT**
+**PUT** **_v1/drivers/{driverId}?status={ONLINE/OFFLINE}_**<br/>
 
 This endpoint will update the driver's online status for the given ID<br/>
 
-**_v1/drivers/{driverId}/cars/{carId}_**<br/>
-**PUT**
+**PUT** **_v1/drivers/{driverId}/cars/{carId}_**<br/>
 
 This will update the driver with their selected car if it is available, also the driver must be online.
 
-**_v1/drivers/{driverId}/cars/_**<br/>
-**PUT**
+**PUT** **_v1/drivers/{driverId}/cars/_**<br/>
 
 This will deselect the car for the given driverId.
 
