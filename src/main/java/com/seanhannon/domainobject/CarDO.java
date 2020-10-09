@@ -37,7 +37,7 @@ public class CarDO {
   @Column(nullable = false)
   private int seatCount;
   @Column(nullable = false)
-  private boolean convertible;
+  private Boolean convertible;
   @Column(nullable = false)
   private int rating;
   @Column(nullable = false)
@@ -46,7 +46,7 @@ public class CarDO {
   @Column(nullable = false)
   private String manufacturer;
   @Column(nullable = false)
-  private boolean selected;
+  private Boolean selected;
   @OneToOne(fetch = FetchType.EAGER)
   @JoinTable(name = "driver_with_car",
     joinColumns = {@JoinColumn(name = "car_id")},

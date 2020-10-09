@@ -1,15 +1,23 @@
 package com.seanhannon.service.car;
 
 import com.seanhannon.dataaccessobject.CarRepository;
+import com.seanhannon.dataaccessobject.rsql.CustomRsqlVisitor;
 import com.seanhannon.domainobject.CarDO;
 import com.seanhannon.exception.ConstraintsViolationException;
 import com.seanhannon.exception.EntityNotFoundException;
+import com.seanhannon.exception.IllegalSearchException;
+import cz.jirutka.rsql.parser.RSQLParser;
+import cz.jirutka.rsql.parser.RSQLParserException;
+import cz.jirutka.rsql.parser.ast.Node;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -63,5 +71,18 @@ public class DefaultCarService implements CarService {
     carDO.setEngineType(carDOUpdate.getEngineType());
     carDO.setManufacturer(carDOUpdate.getManufacturer());
     return carRepository.save(carDO);
+  }
+
+  @Override
+  public Collection<CarDO> search(String search) throws IllegalSearchException {
+    try {
+      Node rootNode = new RSQLParser().parse(search);
+      Specification<CarDO> spec = rootNode.accept(new CustomRsqlVisitor<>());
+      return carRepository.findAll(spec);
+    } catch (RSQLParserException exception) {
+      throw new IllegalSearchException("Search request is invalid, search request: " + search);
+    } catch (InvalidDataAccessApiUsageException exception) {
+      throw new IllegalSearchException("Search request is invalid, search request: " + search);
+    }
   }
 }

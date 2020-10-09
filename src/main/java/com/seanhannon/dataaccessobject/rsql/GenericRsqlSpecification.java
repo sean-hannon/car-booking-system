@@ -140,6 +140,7 @@ public class GenericRsqlSpecification<T> implements Specification<T> {
       if (type.equals(Integer.class)) return Integer.parseInt(arg);
       else if (type.equals(Long.class)) return Long.parseLong(arg);
       else if (type.equals(Byte.class)) return Byte.parseByte(arg);
+      else if (type.equals(Boolean.class)) return Boolean.parseBoolean(arg);
       else if (type.equals(EngineType.class)) return EngineType.valueOf(arg);
       else if (type.equals(OnlineStatus.class)) return OnlineStatus.valueOf(arg);
       else return arg;

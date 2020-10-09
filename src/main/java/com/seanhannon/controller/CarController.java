@@ -5,6 +5,7 @@ import com.seanhannon.datatransferobject.CarDTO;
 import com.seanhannon.domainobject.CarDO;
 import com.seanhannon.exception.ConstraintsViolationException;
 import com.seanhannon.exception.EntityNotFoundException;
+import com.seanhannon.exception.IllegalSearchException;
 import com.seanhannon.service.car.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,6 +38,11 @@ public class CarController {
   @GetMapping("/{carId}")
   public CarDTO getCar(@PathVariable long carId) throws EntityNotFoundException {
     return CarMapper.makeCarDTO(carService.find(carId));
+  }
+
+  @GetMapping(params = {"search"})
+  public List<CarDTO> findAllCarsByQuery(@RequestParam(value = "search") String search) throws IllegalSearchException {
+    return CarMapper.makeCarDTOList(carService.search(search));
   }
 
   @PostMapping

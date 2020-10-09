@@ -74,7 +74,7 @@ public class DriverController {
   }
 
   @GetMapping
-  public List<DriverDTO> findAllByQuery(@RequestParam(value = "search") String search) throws IllegalSearchException {
+  public List<DriverDTO> findAllDriversByQuery(@RequestParam(value = "search") String search) throws IllegalSearchException {
     return DriverMapper.makeDriverDTOList(driverService.search(search));
   }
 

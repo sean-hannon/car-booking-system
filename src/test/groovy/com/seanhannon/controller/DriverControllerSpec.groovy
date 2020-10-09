@@ -146,7 +146,7 @@ class DriverControllerSpec extends Specification{
     driverDOS.add(driverDO)
 
     when:
-    def result = driverController.findAllByQuery("username==Dave")
+    def result = driverController.findAllDriversByQuery("username==Dave")
 
     then:
     1 * driverService.search(_) >> driverDOS
